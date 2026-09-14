@@ -206,7 +206,7 @@ namespace glz
       {
          if (holds<null_t>()) data = array_t{};
          auto& array = std::get<array_t>(data);
-         if (array.size() <= index) {
+         if (array.size() <= static_cast<std::size_t>(index)) {
             array.resize(index + 1);
          }
          return std::get<array_t>(data)[index];
