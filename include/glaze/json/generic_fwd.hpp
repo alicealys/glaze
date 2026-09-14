@@ -563,77 +563,66 @@ namespace glz
 
       template <>
       [[nodiscard]] bool is<std::int8_t>() const noexcept
-         requires(Mode == num_mode::u64)
       {
          return holds<std::uint64_t>() || holds<std::int64_t>();
       }
 
       template <>
       [[nodiscard]] bool is<std::int16_t>() const noexcept
-         requires(Mode == num_mode::u64)
       {
          return holds<std::uint64_t>() || holds<std::int64_t>();
       }
 
       template <>
       [[nodiscard]] bool is<std::int32_t>() const noexcept
-         requires(Mode == num_mode::u64)
       {
          return holds<std::uint64_t>() || holds<std::int64_t>();
       }
 
       template <>
       [[nodiscard]] bool is<std::int64_t>() const noexcept
-         requires(Mode == num_mode::u64)
       {
          return holds<std::uint64_t>() || holds<std::int64_t>();
       }
 
       template <>
       [[nodiscard]] bool is<std::uint8_t>() const noexcept
-         requires(Mode == num_mode::u64)
       {
          return holds<std::uint64_t>() || holds<std::int64_t>();
       }
 
       template <>
       [[nodiscard]] bool is<std::uint16_t>() const noexcept
-         requires(Mode == num_mode::u64)
       {
          return holds<std::uint64_t>() || holds<std::int64_t>();
       }
 
       template <>
       [[nodiscard]] bool is<std::uint32_t>() const noexcept
-         requires(Mode == num_mode::u64)
       {
          return holds<std::uint64_t>() || holds<std::int64_t>();
       }
 
       template <>
       [[nodiscard]] bool is<std::uint64_t>() const noexcept
-         requires(Mode == num_mode::u64)
       {
          return holds<std::uint64_t>() || holds<std::int64_t>();
       }
 
       template <>
       [[nodiscard]] bool is<bool>() const noexcept
-         requires(Mode == num_mode::u64)
       {
          return holds<std::uint64_t>() || holds<std::int64_t>() || holds<bool>();
       }
 
       template <>
       [[nodiscard]] bool is<float>() const noexcept
-         requires(Mode == num_mode::u64)
       {
          return is_number();
       }
 
       template <>
       [[nodiscard]] bool is<double>() const noexcept
-         requires(Mode == num_mode::u64)
       {
          return is_number();
       }
