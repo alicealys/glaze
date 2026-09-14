@@ -171,6 +171,10 @@ namespace glz
          requires(requires { static_cast<T>(std::declval<double>()); })
       [[nodiscard]] T as() const
       {
+         if (holds<bool>()) {
+            return static_cast<T>(get<bool>());
+         }
+
          // Can be used for int and the like
          if constexpr (Mode == num_mode::u64) {
             if (holds<uint64_t>()) {
@@ -552,6 +556,111 @@ namespace glz
          else {
             return 0;
          }
+      }
+
+      template <typename T>
+      [[nodiscard]] bool is() const noexcept;
+
+      template <>
+      [[nodiscard]] bool is<std::int8_t>() const noexcept
+         requires(Mode == num_mode::u64)
+      {
+         return holds<std::uint64_t>() || holds<std::int64_t>();
+      }
+
+      template <>
+      [[nodiscard]] bool is<std::int16_t>() const noexcept
+         requires(Mode == num_mode::u64)
+      {
+         return holds<std::uint64_t>() || holds<std::int64_t>();
+      }
+
+      template <>
+      [[nodiscard]] bool is<std::int32_t>() const noexcept
+         requires(Mode == num_mode::u64)
+      {
+         return holds<std::uint64_t>() || holds<std::int64_t>();
+      }
+
+      template <>
+      [[nodiscard]] bool is<std::int64_t>() const noexcept
+         requires(Mode == num_mode::u64)
+      {
+         return holds<std::uint64_t>() || holds<std::int64_t>();
+      }
+
+      template <>
+      [[nodiscard]] bool is<std::uint8_t>() const noexcept
+         requires(Mode == num_mode::u64)
+      {
+         return holds<std::uint64_t>() || holds<std::int64_t>();
+      }
+
+      template <>
+      [[nodiscard]] bool is<std::uint16_t>() const noexcept
+         requires(Mode == num_mode::u64)
+      {
+         return holds<std::uint64_t>() || holds<std::int64_t>();
+      }
+
+      template <>
+      [[nodiscard]] bool is<std::uint32_t>() const noexcept
+         requires(Mode == num_mode::u64)
+      {
+         return holds<std::uint64_t>() || holds<std::int64_t>();
+      }
+
+      template <>
+      [[nodiscard]] bool is<std::uint64_t>() const noexcept
+         requires(Mode == num_mode::u64)
+      {
+         return holds<std::uint64_t>() || holds<std::int64_t>();
+      }
+
+      template <>
+      [[nodiscard]] bool is<bool>() const noexcept
+         requires(Mode == num_mode::u64)
+      {
+         return holds<std::uint64_t>() || holds<std::int64_t>() || holds<bool>();
+      }
+
+      template <>
+      [[nodiscard]] bool is<float>() const noexcept
+         requires(Mode == num_mode::u64)
+      {
+         return is_number();
+      }
+
+      template <>
+      [[nodiscard]] bool is<double>() const noexcept
+         requires(Mode == num_mode::u64)
+      {
+         return is_number();
+      }
+
+      template <class T>
+         requires std::convertible_to<std::string, T>
+      [[nodiscard]] bool is() const noexcept
+      {
+         return is_string();
+      }
+
+      template <>
+      [[nodiscard]] bool is<object_t>() const noexcept
+      {
+         return is_object();
+      }
+
+      template <>
+      [[nodiscard]] bool is<array_t>() const noexcept
+      {
+         return is_array();
+      }
+
+      template <>
+      [[nodiscard]] bool is<std::nullptr_t>() const noexcept
+      {
+         return is_null();
       }
    };
 
